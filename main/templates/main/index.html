@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+        <a href="">О тренажере</a>
+        <a href="">Личный кабинет</a>
+        </div>
+    <h1>Project.online - тренажер по<br> разработке проекта</h1>
+    <p>Курс поможет узнать, как делать проект и даст<br> инструменты для его выполнения</p>
+    <div class="button">
+    <button class="register">РЕГИСТРАЦИЯ</button> <br>
+    </div>
+    {% if tasks %}
+        {% for el in tasks %}
+            <div class="alert alert-warning mt-2">
+                <h3>{{ el.title }}</h3>
+                <p>{{ el.task }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>У нас нет записей</p>
+    {% endif %}
+{% endblock %}
+
+
+

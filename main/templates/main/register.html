@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<form method="post">
+{% csrf_token %}
+<h5>Имя пользователя</h5>
+{{ form.username}}
+    <h5>Выберите роль</h5>
+{{ form.choice_field }}
+<h5>Введите e-mail</h5>
+{{ form.email }}
+<h5>Пароль</h5>
+{{ form.password1 }}
+<h5>Подтвердите пароль</h5>
+{{ form.password2 }}
+
+<button type="submit" name='add' class="btn btn-primary btn-block">Регистрация</button>
+    </form>
+{% endblock %}
+
+
