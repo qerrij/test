@@ -10,10 +10,10 @@ class UserLoginForm(AuthenticationForm):
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
 
-STATUS = [
+STATUS = (
         ('1', 'Ученик'),
         ('2', 'Учитель')
-    ]
+)
 
 
 class UserRegisterForm(ModelForm):
