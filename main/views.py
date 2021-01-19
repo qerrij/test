@@ -1,14 +1,14 @@
 from django.shortcuts import render, redirect
-from .models import Task, regisrtation
+from .models import Task
 from .forms import TaskForm
 from django.contrib import messages
-from .forms import UserRegisterForm, UserLoginForm
+from .forms import CustomUserCreationForm, UserLoginForm
 from django.contrib.auth import login, logout
 
 
 def register(request):
     if 'add' in request.POST:
-        form = UserRegisterForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.has_changed():
             print(form.fields['choice_field'])
         if form.is_valid():
@@ -19,7 +19,7 @@ def register(request):
             messages.error(request, 'Ошибка регистрации')
             print(form.errors.as_data())
             print(form.cleaned_data)
-    form = UserRegisterForm()
+    form = CustomUserCreationForm()
     return render(request, 'main/register.html', {"form": form})
 
 

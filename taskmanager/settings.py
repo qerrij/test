@@ -39,11 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'main',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.vk',
 ]
+
+AUTH_USER_MODEL = 'main.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

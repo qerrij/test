@@ -1,7 +1,4 @@
 <!doctype html>
-{% load socialaccount %}
-{% load account %}
-{% get_providers as socialaccount_providers %}
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -40,13 +37,12 @@
             <a class="p-2 text-dark" href="{% url 'about' %}">Про нас</a>
               <a class="p-2 text-dark" href="{% url 'create' %}">Создать проект</a>
           </nav>
-            <span class="p-2 text-dark">{{ user.first_name}} {{ user.last_name }} {{ user.username }}</span>
+       <span class="p-2 text-dark">{{ user.first_name}} {{ user.last_name }} {{ user.username }}</span>
             <nav class="my-2 my-md-0 me-md-3">
             {% if user.is_authenticated %}
           <a class="btn btn-outline-primary" href="{% url 'logout' %}">Выйти</a>
             {% else %}
             <a class="btn btn-outline-primary" href="{% url 'login' %}">Войти</a>
-            <a class="btn btn-outline-primary" href="{% provider_login_url 'vk' %}">Войти VK</a>
             <a class="btn btn-outline-primary" href="{% url 'register' %}">Зарегестрироваться</a>
                 </nav>
             {% endif %}

@@ -1,6 +1,15 @@
 from django.contrib import admin
-from .models import Task, regisrtation
+from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import UserAdmin
+
+from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .models import CustomUser
 
 
-admin.site.register(Task),
-admin.site.register(regisrtation)
+class CustomUserAdmin(UserAdmin):
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
+    model = CustomUser
+    list_display = ['username', 'choice_field', 'email', 'password1', 'password2']
+
+admin.site.register(CustomUser, CustomUserAdmin)

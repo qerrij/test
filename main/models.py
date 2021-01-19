@@ -1,18 +1,19 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 from django import forms
 
 
-class regisrtation(models.Model):
+class CustomUser(AbstractUser):
     STATUS = (
         ('1', 'Ученик'),
         ('2', 'Учитель')
     )
-    id = models.AutoField(primary_key=True)
-    username = models.TextField()
+    # id = models.AutoField(primary_key=True)
+    # username = models.TextField()
     # choice_field = models.TextField()
     # choice_field = ModelChoiceField()
     choice_field = models.TextField(choices=STATUS)
-    email = models.EmailField()
+    # email = models.EmailField()
     password1 = models.TextField()
     password2 = models.TextField()
 

@@ -1,5 +1,7 @@
 from django import forms
-from .models import Task, regisrtation
+from .models import Task
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import CustomUser
 from django.forms import ModelForm, TextInput, Textarea
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -16,7 +18,14 @@ STATUS = (
 )
 
 
-class UserRegisterForm(ModelForm):
+class CustomUserChangeForm(UserChangeForm):
+
+    class Meta(UserCreationForm):
+        model = CustomUser
+        fields = ['username', 'choice_field', 'email', 'password1', 'password2']
+
+
+class CustomUserCreationForm(UserCreationForm):
     username = forms.CharField(label='Имя пользователя', widget=forms.TextInput(attrs={'class': 'form-control'}))
     choice_field = forms.ChoiceField(widget=forms.RadioSelect, choices=STATUS)
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
@@ -24,7 +33,7 @@ class UserRegisterForm(ModelForm):
     email = forms.EmailField(label='E-mail', widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
     class Meta:
-        model = regisrtation
+        model = CustomUser
         fields = ['username', 'choice_field', 'email', 'password1', 'password2']
         # widgets = {
         #     'username': forms.TextInput(attrs={'class': 'form-control'}),
