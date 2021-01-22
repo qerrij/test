@@ -45,6 +45,10 @@ def index(request):
     return render(request, 'main/index.html', {'title': 'Главная страница сайта', 'tasks': tasks})
 
 
+def student_personal(request):
+    return render(request, 'main/student-personal.html')
+
+
 def about(request):
     return render(request, 'main/about.html')
 

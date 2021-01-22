@@ -1,0 +1,29 @@
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+.content {
+    margin: 30px;
+}
+.screen{
+    display: inline-block;
+    border: 1px solid black;
+    width: 24%;
+    outline: none;
+}
+.screen1 {
+    background-color: palegreen;
+    display: inline-block;
+    width: 24%;
+}
+.screen2{
+    background-color: pink;
+    display: inline-block;
+    width: 24%;
+}
+.screen3{
+    background-color: orange;
+    display: inline-block;
+    width: 24%;
+}
