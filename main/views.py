@@ -17,8 +17,8 @@ def register(request):
             return redirect('home')
         else:
             messages.error(request, 'Ошибка регистрации')
-            print(form.errors.as_data())
-            print(form.cleaned_data)
+            # print(form.errors.as_data())
+            # print(form.cleaned_data)
     form = CustomUserCreationForm()
     return render(request, 'main/register.html', {"form": form})
 
@@ -28,8 +28,12 @@ def user_login(request):
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
+            print(user)
             login(request, user)
-            return redirect('home')
+            if user.choice_field == '1':
+                return redirect('student_personal')
+            else:
+                return redirect('home')
     else:
         form = UserLoginForm()
     return render(request, 'main/login.html', {'form': form})

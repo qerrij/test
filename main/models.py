@@ -22,6 +22,10 @@ class CustomUser(AbstractUser):
         return template.format(self)
 
 
+# class Teacher(AbstractUser):
+#     pass
+
+
 class Task(models.Model):
     title = models.CharField('Название', max_length=50)
     task = models.TextField('Описание')
