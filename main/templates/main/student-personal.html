@@ -1,6 +1,6 @@
 {% load static %}
 <!Doctype html>
-<html lang="ru">
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -37,7 +37,7 @@
             <a class="p-2 text-dark" href="{% url 'home' %}">Главная</a>
             <a class="p-2 text-dark" href="{% url 'about' %}">Про нас</a>
               <a class="p-2 text-dark" href="{% url 'create' %}">Создать проект</a>
-              <a class="p-2 text-dark" href="{% url 'student_personal' %}">Личный кабинет</a>
+              <a class="p-2 text-dark" href="{% url 'personal_account' %}">Личный кабинет</a>
           </nav>
        <span class="p-2 text-dark">{{ user.first_name}} {{ user.last_name }} {{ user.username }}</span>
             <nav class="my-2 my-md-0 me-md-3">
@@ -87,13 +87,13 @@
         </ol>
     </div>
     <div class="screen1">
-            <a>START</a>
+        <button name="click" class="click"> <a>START</a> </button>
             <ol>
                 <li>Модуль 1.<br>
                     Предпроектный этап<br>
                     этап</li>
                     <ol>
-                        <li>Актуализация</li>
+                        <li></li>
                         <li>Проблематизация</li>
                         <li>Целеполагание</li>
                         <li>Концептуализация</li>

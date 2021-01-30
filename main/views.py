@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Task
+from .models import Task, Module
 from .forms import TaskForm
 from django.contrib import messages
 from .forms import CustomUserCreationForm, UserLoginForm
@@ -30,10 +30,10 @@ def user_login(request):
             user = form.get_user()
             print(user)
             login(request, user)
-            if user.choice_field == '1':
-                return redirect('student_personal')
-            else:
-                return redirect('home')
+            # if user.choice_field == '1':
+            #    return redirect('personal_account')
+            #else:
+            return redirect('home')
     else:
         form = UserLoginForm()
     return render(request, 'main/login.html', {'form': form})
@@ -42,6 +42,7 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('home')
+# def student_personal(request):
 
 
 def index(request):
@@ -49,8 +50,13 @@ def index(request):
     return render(request, 'main/index.html', {'title': 'Главная страница сайта', 'tasks': tasks})
 
 
-def student_personal(request):
-    return render(request, 'main/student-personal.html')
+def personal_account(request):
+    # print(request.user)
+    if request.user.choice_field == '1':
+        return render(request, 'main/student-personal.html')
+
+    else:
+        return render(request, 'main/index.html')
 
 
 def about(request):

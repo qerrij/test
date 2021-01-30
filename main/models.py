@@ -22,8 +22,28 @@ class CustomUser(AbstractUser):
         return template.format(self)
 
 
-# class Teacher(AbstractUser):
-#     pass
+class Cases(models.Model):
+    task = models.TextField()
+    answer_option = models.TextField()
+    answer = models.IntegerField()
+
+
+class Course(models.Model):
+    name = models.TextField()
+    information = models.TextField()
+    cases = [Cases() for u in range(5)]
+    project = []
+
+
+class Module(models.Model):
+    DONE = {
+        ('0', 'START'),
+        ('1', 'CONTINUE'),
+        ('2', 'STOP')
+    }
+    name = models.TextField()
+    course = [Course() for u in range(5)]
+    status = models.TextField(choices=DONE)
 
 
 class Task(models.Model):
