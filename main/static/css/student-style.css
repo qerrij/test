@@ -5,28 +5,91 @@ body {
 }
 .content {
     margin: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    margin-top: 10vh;
+}
+.folder {
+    background-color: rgb(54, 221, 54);
+}
+.screen1 ol {
+    margin-left: 2vh;
+    padding: 0;
+    font-size: 30px;
+    /* убираем стандартную нумерацию */
+   list-style: none;
+   /* Идентифицируем счетчик и даем ему имя li. Значение счетчика не указано - по умолчанию оно равно 0 */
+   counter-reset: li;
+}
+.screen1 ol li{
+    line-height: 8vh;
+
+}
+.screen1 ol li:before{
+    /* Определяем элемент, который будет нумероваться — li. Псевдоэлемент before указывает, что содержимое, вставляемое при помощи свойства content, будет располагаться перед пунктами списка. Здесь же устанавливается значение приращения счетчика (по умолчанию равно 1). */
+   counter-increment: li;
+   /* С помощью свойства content выводится номер пункта списка. counters() означает, что генерируемый текст представляет собой значения всех счетчиков с таким именем. Точка в кавычках добавляет разделяющую точку между цифрами, а точка с пробелом добавляется перед содержимым каждого пункта списка */
+   content: counters(li, ".") ". ";
 }
 .screen{
     display: inline-block;
     border: 1px solid black;
     width: 24%;
     outline: none;
+    padding: 15px;
+    width: calc(100% / 3 - 40px);
+    margin-left: 20px;
+    margin-right: 20px;
+    /* height: 75%; */
 }
 .screen1 {
-    background-color: palegreen;
+    background-color: rgb(214, 250, 214);
     display: inline-block;
     width: 24%;
+    padding: 15px;
+    width: calc(100% / 3 - 40px);
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 8px;
 }
 .screen2{
     background-color: pink;
     display: inline-block;
     width: 24%;
+    padding: 15px;
+    width: calc(100% / 3 - 40px);
+    margin-left: 20px;
+    margin-right: 20px;
 }
 .screen3{
     background-color: orange;
     display: inline-block;
     width: 24%;
+    padding: 15px;
+    width: calc(100% / 3 - 40px);
+    margin-left: 20px;
+    margin-right: 20px;
 }
-.click {
+.first a{
+    display: block;
+    color: white;
+}
+.first {
+    margin: 0 auto;
+    /* display: inline-block; */
+    border-radius: 50%;
+    text-align: center;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 13vh;
+    height: 13vh;
+    z-index: 1;
+    position: relative;
+    top: -8vh;
+    background-color: rgb(54, 221, 54);
 
 }

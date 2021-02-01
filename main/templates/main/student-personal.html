@@ -1,14 +1,13 @@
-{% load static %}
-<!Doctype html>
-<html lang="ru" xmlns="http://www.w3.org/1999/html">
+<!doctype html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/student-style.css' %}">
+    <link rel="stylesheet" href="student-style.css">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
         {% if messages  %}
@@ -37,7 +36,7 @@
             <a class="p-2 text-dark" href="{% url 'home' %}">Главная</a>
             <a class="p-2 text-dark" href="{% url 'about' %}">Про нас</a>
               <a class="p-2 text-dark" href="{% url 'create' %}">Создать проект</a>
-              <a class="p-2 text-dark" href="{% url 'personal_account' %}">Личный кабинет</a>
+              <a class="p-2 text-dark" href="{% url 'student_personal' %}">Личный кабинет</a>
           </nav>
        <span class="p-2 text-dark">{{ user.first_name}} {{ user.last_name }} {{ user.username }}</span>
             <nav class="my-2 my-md-0 me-md-3">
@@ -49,67 +48,75 @@
                 </nav>
             {% endif %}
         </header>
-        <div class="content">
-       <div class="screen">
-     <h2><b>Выполняй<br> модули</b></h2>
-    <p>Тебе предстоит пройти три модуля<br>
-       последовательно. Ожидай проверки<br>
-       наставником. Продолжай двигаться после<br>
-       зачета по каждому модулю.</p>
-        <ol>
-            <li>
-            <p>Нажимай на "старт" или<br>
-               "продолжить". Двигайся от<br>
-               модуля 1 (зеленый) к модулю<br>
-               3 (оранжевый).</p>
-            </li>
-            <li>
-            <p>Жди проверки по модулю<br>
-               пока горит кнопка "Stop"<br></p>
-                <img alt="" src="">
-                <img alt="" src="">
-                <img alt="" src="">
-            </li>
-            <li>
-                 <p>Жди реакцию учителя<br>
-                    иконками или общайся в с<br>
-                    ним в чате</p>
-                <img alt="" src="">
-                <img alt="" src="">
-                <img alt="" src="">
-            </li>
-            <li>
-                <p>Следи за динамикой работы<br>
-                    над проектом здесь</p>
-                <img alt="" src="">
-                <img alt="" src="">
-            </li>
-        </ol>
-    </div>
-    <div class="screen1">
-        <button name="click" class="click"> <a>START</a> </button>
-            <ol>
-                <li>Модуль 1.<br>
-                    Предпроектный этап<br>
-                    этап</li>
-                    <ol>
-                        <li></li>
-                        <li>Проблематизация</li>
-                        <li>Целеполагание</li>
-                        <li>Концептуализация</li>
-                        <li>Планирование</li>
-                    </ol>
-                </ol>
-                </div>
-    <div class="screen2">
-        <a>STOP</a>
+<article class="content">
+        <div class="screen">
+      <h2><b>Выполняй<br> модули</b></h2>
+     <p>Тебе предстоит пройти три модуля<br>
+        последовательно. Ожидай проверки<br>
+        наставником. Продолжай двигаться после<br>
+        зачета по каждому модулю.</p>
+         <ol>
+             <li>
+             <p>
+                 Нажимай на "старт" или<br>
+                "продолжить". Двигайся от<br>
+                модуля 1 (зеленый) к модулю<br>
+                3 (оранжевый).</p>
+             </li>
+             <li>
+             <p>Жди проверки по модулю<br>
+                пока горит кнопка "Stop"<br></p>
+                 <img alt="" src="">
+                 <img alt="" src="">
+                 <img alt="" src="">
+             </li>
+             <li>
+                  <p>Жди реакцию учителя<br>
+                     иконками или общайся в с<br>
+                     ним в чате</p>
+                 <img alt="" src="">
+                 <img alt="" src="">
+                 <img alt="" src="">
+             </li>
+             <li>
+                 <p>Следи за динамикой работы<br>
+                     над проектом здесь</p>
+                 <img alt="" src="">
+                 <img alt="" src="">
+             </li>
+         </ol>
+     </div>
+     <div class="screen1">
+         <div class="first">
+             <a >START</a>
+             </div>
+                     <ol>
+                         <li>Пункт 1</li>
+                            <ol>
+                                <li>Актуализация</li>
+                                <li type="">Проблематизация</li>
 
-    </div>
-    <div class="screen3">
-        <a>CONTINUE</a>
+                                <li>Целеполагание</li>
+                                <li>Концептуализация</li>
+                                <li>Планирование</li>
+                            </ol>
+                     </ol>
+                     <div class="folder">
+                        <h4>Модуль 1.
+                            Предпроектный этап
+                            этап</h4>
+                     </div>
+                 <img src="" alt="">
+                 </div>
+     <div class="screen2">
+         <a>STOP</a>
 
-    </div>
-        </div>
+     </div>
+     <div class="screen3">
+         <a>CONTINUE</a>
+
+     </div>
+    </article>
         {% block content %}{% endblock %}
 </body>
 </html>
