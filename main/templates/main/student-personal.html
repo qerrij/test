@@ -1,4 +1,5 @@
-<!doctype html>
+{% load staticfiles %}
+<!Doctype html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -6,8 +7,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="student-style.css">
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static "css/student-style.css" %}">
 </head>
 <body>
         {% if messages  %}
@@ -30,13 +31,14 @@
           header{
           margin: 0 auto;
         </style>
+        {% block content %}
         <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
           <p class="h5 my-0 me-md-auto fw-normal">Project.Online</p>
           <nav class="my-2 my-md-0 me-md-3">
             <a class="p-2 text-dark" href="{% url 'home' %}">Главная</a>
             <a class="p-2 text-dark" href="{% url 'about' %}">Про нас</a>
               <a class="p-2 text-dark" href="{% url 'create' %}">Создать проект</a>
-              <a class="p-2 text-dark" href="{% url 'student_personal' %}">Личный кабинет</a>
+              <a class="p-2 text-dark" href="{% url 'personal_account' %}">Личный кабинет</a>
           </nav>
        <span class="p-2 text-dark">{{ user.first_name}} {{ user.last_name }} {{ user.username }}</span>
             <nav class="my-2 my-md-0 me-md-3">
@@ -48,8 +50,8 @@
                 </nav>
             {% endif %}
         </header>
-<article class="content">
-        <div class="screen">
+ <main class="content">
+        <article class="screen">
       <h2><b>Выполняй<br> модули</b></h2>
      <p>Тебе предстоит пройти три модуля<br>
         последовательно. Ожидай проверки<br>
@@ -57,36 +59,35 @@
         зачета по каждому модулю.</p>
          <ol>
              <li>
-             <p>
-                 Нажимай на "старт" или<br>
-                "продолжить". Двигайся от<br>
-                модуля 1 (зеленый) к модулю<br>
-                3 (оранжевый).</p>
+                 Нажимай на "старт" или
+                "продолжить". Двигайся от
+                модуля 1 (зеленый) к модулю
+                3 (оранжевый).
              </li>
              <li>
-             <p>Жди проверки по модулю<br>
-                пока горит кнопка "Stop"<br></p>
+             Жди проверки по модулю<br>
+                пока горит кнопка "Stop"<br>
                  <img alt="" src="">
                  <img alt="" src="">
                  <img alt="" src="">
              </li>
              <li>
-                  <p>Жди реакцию учителя<br>
+                  Жди реакцию учителя<br>
                      иконками или общайся в с<br>
-                     ним в чате</p>
+                     ним в чате
                  <img alt="" src="">
                  <img alt="" src="">
                  <img alt="" src="">
              </li>
              <li>
-                 <p>Следи за динамикой работы<br>
-                     над проектом здесь</p>
+                 Следи за динамикой работы<br>
+                     над проектом здесь
                  <img alt="" src="">
                  <img alt="" src="">
              </li>
          </ol>
-     </div>
-     <div class="screen1">
+        </article>
+     <article class="screen1">
          <div class="first">
              <a >START</a>
              </div>
@@ -94,8 +95,7 @@
                          <li>Пункт 1</li>
                             <ol>
                                 <li>Актуализация</li>
-                                <li type="">Проблематизация</li>
-
+                                <li>Проблематизация</li>
                                 <li>Целеполагание</li>
                                 <li>Концептуализация</li>
                                 <li>Планирование</li>
@@ -106,17 +106,46 @@
                             Предпроектный этап
                             этап</h4>
                      </div>
-                 <img src="" alt="">
-                 </div>
-     <div class="screen2">
-         <a>STOP</a>
-
-     </div>
-     <div class="screen3">
-         <a>CONTINUE</a>
-
-     </div>
-    </article>
-        {% block content %}{% endblock %}
+     </article>
+     <article class="screen2">
+        <div class="second">
+            <a>STOP</a>
+        </div>
+        <ol>
+            <li>Пункт 2</li>
+               <ol>
+                   <li>Актуализация</li>
+                   <li>Проблематизация</li>
+                   <li>Целеполагание</li>
+                   <li>Концептуализация</li>
+                   <li>Планирование</li>
+               </ol>
+        </ol>
+        <div class="folder-second">
+           <h4>Модуль 2.<br>
+            Реализация
+        </div>
+     </article>
+     <article class="screen3">
+         <div class="third">
+            <a>CONTINUE</a>
+        </div>
+         <ol>
+            <li>Пункт 3</li>
+               <ol>
+                   <li>Актуализация</li>
+                   <li>Проблематизация</li>
+                   <li>Целеполагание</li>
+                   <li>Концептуализация</li>
+                   <li>Планирование</li>
+               </ol>
+        </ol>
+        <div class="folder-third">
+           <h4>Модуль 3.<br>
+            Реализация
+        </div>
+     </article>
+    </main>
+        {% endblock %}
 </body>
 </html>
