@@ -28,6 +28,11 @@ class Cases(models.Model):
     answer = models.IntegerField()
 
 
+class Project(models.Model):
+    name = models.TextField()
+    content = models.TextField()
+
+
 class Course(models.Model):
     # course_id = models.AutoField(primary_key=True)
     cases = models.OneToOneField(
@@ -35,17 +40,9 @@ class Course(models.Model):
         on_delete=models.CASCADE)
     name = models.TextField()
     information = models.TextField()
-    # members = models.ManyToManyField(
-    #     Cases,
-    #     through='Module',
-    #     through_fields=('course', 'cases'),
-    # )
-    # project =
-
-# class try_to_die(models.Model):
-#     course = models.OneToOneField(
-#         'Course',
-#         on_delete=models.CASCADE)
+    project = models.OneToOneField(
+        'Project',
+        on_delete=models.CASCADE)
 
 
 class Module(models.Model):
