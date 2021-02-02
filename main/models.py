@@ -29,10 +29,23 @@ class Cases(models.Model):
 
 
 class Course(models.Model):
+    # course_id = models.AutoField(primary_key=True)
+    cases = models.OneToOneField(
+        'Cases',
+        on_delete=models.CASCADE)
     name = models.TextField()
     information = models.TextField()
-    cases = [Cases() for u in range(5)]
-    project = []
+    # members = models.ManyToManyField(
+    #     Cases,
+    #     through='Module',
+    #     through_fields=('course', 'cases'),
+    # )
+    # project =
+
+# class try_to_die(models.Model):
+#     course = models.OneToOneField(
+#         'Course',
+#         on_delete=models.CASCADE)
 
 
 class Module(models.Model):
@@ -41,8 +54,11 @@ class Module(models.Model):
         ('1', 'CONTINUE'),
         ('2', 'STOP')
     }
+    course = models.OneToOneField(
+        'Course',
+        on_delete=models.CASCADE)
+    # cases = models.ForeignKey('Cases', on_delete=models.CASCADE)
     name = models.TextField()
-    course = [Course() for u in range(5)]
     status = models.TextField(choices=DONE)
 
 

@@ -1,5 +1,5 @@
 body {
-    height: 100vh;
+    height: 200000000000000000px;
     margin: 0;
     padding: 0;
     font-family: 'Noto Sans', sans-serif;
@@ -84,7 +84,7 @@ body {
     margin-right: 20px;
     border-radius: 8px;
 }
-a{
+main a{
     display: block;
     color: white;
 }
@@ -149,6 +149,7 @@ a{
 }
 .folder-third{
     text-align: center;
+    text-size: 4vh;
     background-color:rgb(255, 215, 86);
     height: 10vh;
     width: 20vh;
