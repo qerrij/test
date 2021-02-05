@@ -1,5 +1,5 @@
 from django import forms
-from .models import Task
+from .models import *
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser
 from django.forms import ModelForm, TextInput, Textarea
@@ -46,6 +46,16 @@ class CustomUserCreationForm(UserCreationForm):
     # def __init__(self, *args, **kwargs):
     #     super(UserRegisterForm, self).__init__(*args, **kwargs)
     #     self.fields['choice_field'].empty_label = 'Please Select'
+
+
+class CreationModule(Module):
+    name_module = forms.CharField(label='Название модуля',widget=forms.TextInput(attrs={'class': 'name_module'}))
+    quantity = forms.IntegerField()
+
+    class Meta:
+        model = Module
+        fields = ['name_module', 'quantity', 'names_courses']
+
 
 
 class TaskForm(ModelForm):

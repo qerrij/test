@@ -28,6 +28,12 @@ class Cases(models.Model):
     answer = models.IntegerField()
 
 
+# class try_to_die(models.Model):
+#     cases = models.OneToOneField(
+#         'Cases',
+#         on_delete=models.CASCADE)
+
+
 class Project(models.Model):
     name = models.TextField()
     content = models.TextField()
@@ -35,12 +41,13 @@ class Project(models.Model):
 
 class Course(models.Model):
     # course_id = models.AutoField(primary_key=True)
-    cases = models.OneToOneField(
+    #поставил отношения один ко многим
+    cases = models.ForeignKey(
         'Cases',
         on_delete=models.CASCADE)
     name = models.TextField()
     information = models.TextField()
-    project = models.OneToOneField(
+    project = models.ForeignKey(
         'Project',
         on_delete=models.CASCADE)
 
@@ -51,7 +58,7 @@ class Module(models.Model):
         ('1', 'CONTINUE'),
         ('2', 'STOP')
     }
-    course = models.OneToOneField(
+    course = models.ForeignKey(
         'Course',
         on_delete=models.CASCADE)
     # cases = models.ForeignKey('Cases', on_delete=models.CASCADE)

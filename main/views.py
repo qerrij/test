@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Task, Module
+from .models import Task, Module, Course
 from .forms import TaskForm
 from django.contrib import messages
 from .forms import CustomUserCreationForm, UserLoginForm
@@ -53,7 +53,13 @@ def index(request):
 def personal_account(request):
     # print(request.user)
     if request.user.choice_field == '1':
-        return render(request, 'main/student-personal.html')
+        module = Module.objects.all()
+        name_course = Course.objects.all
+        context = {
+            'module': module,
+            'name_course': name_course
+        }
+        return render(request, 'main/student-personal.html', context)
 
     else:
         return render(request, 'main/index.html')

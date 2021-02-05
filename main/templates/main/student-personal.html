@@ -87,26 +87,28 @@
              </li>
          </ol>
         </article>
-     <article class="screen1">
-         <div class="first">
-             <a >START</a>
-             </div>
-                     <ol>
-<!--                         <li>Пункт 1</li>-->
-                            <ol>
-                                <li>Актуализация</li>
-                                <li>Проблематизация</li>
-                                <li>Целеполагание</li>
-                                <li>Концептуализация</li>
-                                <li>Планирование</li>
-                            </ol>
-                     </ol>
-<!--                     <div class="folder">-->
-<!--                        <h4>Модуль 1.-->
-<!--                            Предпроектный этап-->
-<!--                            </h4>-->
-<!--                     </div>-->
-     </article>
+     {% for post in module %}
+         <article class="screen1">
+             <div class="first">
+                 <a>START</a>
+                 </div>
+                         <ol>
+                             <li>Пункт 1</li>
+                                <ol>
+                                    <li>{{ post.course.name }}</li>
+                                    <li>Проблематизация</li>
+                                    <li>Целеполагание</li>
+                                    <li>Концептуализация</li>
+                                    <li>Планирование</li>
+                                </ol>
+                         </ol>
+                         <div class="folder">
+                            <h4>Модуль 1.
+                                Предпроектный этап
+                                </h4>
+                         </div>
+                     {% endfor %}
+         </article>
      <article class="screen2">
         <div class="second">
             <a>STOP</a>
