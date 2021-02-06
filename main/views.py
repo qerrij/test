@@ -50,6 +50,10 @@ def index(request):
     return render(request, 'main/index.html', {'title': 'Главная страница сайта', 'tasks': tasks})
 
 
+def create_module(request):
+    pass
+
+
 def personal_account(request):
     # print(request.user)
     if request.user.choice_field == '1':

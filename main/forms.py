@@ -50,11 +50,10 @@ class CustomUserCreationForm(UserCreationForm):
 
 class CreationModule(Module):
     name_module = forms.CharField(label='Название модуля',widget=forms.TextInput(attrs={'class': 'name_module'}))
-    quantity = forms.IntegerField()
 
-    class Meta:
-        model = Module
-        fields = ['name_module', 'quantity', 'names_courses']
+    # class Meta:
+    #     model = Module
+    #     fields = ['name_module', 'names_courses']
 
 
 

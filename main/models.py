@@ -58,8 +58,30 @@ class Module(models.Model):
         ('1', 'CONTINUE'),
         ('2', 'STOP')
     }
+    # quantity = models.IntegerField()
+    # courses = []
+    # def create_courses(self, ):
+    #     self.courses.append(Course)
+    #
     course = models.ForeignKey(
         'Course',
+        related_name='first_course',
+        on_delete=models.CASCADE)
+    course2 = models.ForeignKey(
+        'Course',
+        related_name='second_course',
+        on_delete=models.CASCADE)
+    course3 = models.ForeignKey(
+        'Course',
+        related_name='third_course',
+        on_delete=models.CASCADE)
+    course4 = models.ForeignKey(
+        'Course',
+        related_name='fourth_course',
+        on_delete=models.CASCADE)
+    course5 = models.ForeignKey(
+        'Course',
+        related_name='fifth_course',
         on_delete=models.CASCADE)
     # cases = models.ForeignKey('Cases', on_delete=models.CASCADE)
     name = models.TextField()
