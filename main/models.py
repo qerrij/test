@@ -47,9 +47,20 @@ class Course(models.Model):
         on_delete=models.CASCADE)
     name = models.TextField()
     information = models.TextField()
-    project = models.ForeignKey(
-        'Project',
-        on_delete=models.CASCADE)
+    # project = models.ForeignKey(
+    #     'Project',
+    #     on_delete=models.CASCADE)
+
+
+class CourseCase(models.Model):
+    course_id = models.ForeignKey(
+        'Course',
+        on_delete=models.CASCADE
+    )
+    case_id = models.ForeignKey(
+        'Cases',
+        on_delete=models.CASCADE
+    )
 
 
 class Module(models.Model):
@@ -62,28 +73,10 @@ class Module(models.Model):
     # courses = []
     # def create_courses(self, ):
     #     self.courses.append(Course)
-    #
     course = models.ForeignKey(
         'Course',
         related_name='first_course',
         on_delete=models.CASCADE)
-    course2 = models.ForeignKey(
-        'Course',
-        related_name='second_course',
-        on_delete=models.CASCADE)
-    course3 = models.ForeignKey(
-        'Course',
-        related_name='third_course',
-        on_delete=models.CASCADE)
-    course4 = models.ForeignKey(
-        'Course',
-        related_name='fourth_course',
-        on_delete=models.CASCADE)
-    course5 = models.ForeignKey(
-        'Course',
-        related_name='fifth_course',
-        on_delete=models.CASCADE)
-    # cases = models.ForeignKey('Cases', on_delete=models.CASCADE)
     name = models.TextField()
     status = models.TextField(choices=DONE)
 

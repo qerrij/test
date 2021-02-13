@@ -48,13 +48,13 @@ class CustomUserCreationForm(UserCreationForm):
     #     self.fields['choice_field'].empty_label = 'Please Select'
 
 
-class CreationModule(Module):
-    name_module = forms.CharField(label='Название модуля',widget=forms.TextInput(attrs={'class': 'name_module'}))
+class CreationModule(ModelForm):
+    name = forms.CharField(label='Название модуля', widget=forms.TextInput(attrs={'class': 'name'}))
+    name_course = forms.CharField(label='Название курса', widget=forms.TextInput(attrs={'class': 'name'}))
 
-    # class Meta:
-    #     model = Module
-    #     fields = ['name_module', 'names_courses']
-
+    class Meta:
+        model = Module
+        fields = ['name', 'course']
 
 
 class TaskForm(ModelForm):

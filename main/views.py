@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Task, Module, Course
-from .forms import TaskForm
+from .forms import TaskForm, CreationModule
 from django.contrib import messages
 from .forms import CustomUserCreationForm, UserLoginForm
 from django.contrib.auth import login, logout
@@ -21,6 +21,17 @@ def register(request):
             # print(form.cleaned_data)
     form = CustomUserCreationForm()
     return render(request, 'main/register.html', {"form": form})
+
+
+def create_module(request):
+    if 'add' in request.POST:
+        form = CreationModule(request.POST)
+        print(form)
+        if form.is_valid():
+            form.save()
+    form = CreationModule()
+    print(form)
+    return render(request, 'main/teacher-personal.html', {"form": form})
 
 
 def user_login(request):
@@ -66,7 +77,7 @@ def personal_account(request):
         return render(request, 'main/student-personal.html', context)
 
     else:
-        return render(request, 'main/index.html')
+        return render(request, 'main/teacher-personal.html')
 
 
 def about(request):
