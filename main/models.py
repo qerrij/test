@@ -73,16 +73,18 @@ class Module(models.Model):
     # courses = []
     # def create_courses(self, ):
     #     self.courses.append(Course)
+
     course = models.ForeignKey(
         'Course',
         related_name='first_course',
         on_delete=models.CASCADE)
-    name = models.TextField()
+    name = models.CharField('Название', max_length=50)
     status = models.TextField(choices=DONE)
 
 
 class Task(models.Model):
     title = models.CharField('Название', max_length=50)
+    # name = models.CharField('Имя', max_length=50)
     task = models.TextField('Описание')
 
     def __str__(self):

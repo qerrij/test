@@ -23,17 +23,6 @@ def register(request):
     return render(request, 'main/register.html', {"form": form})
 
 
-def create_module(request):
-    if 'add' in request.POST:
-        form = CreationModule(request.POST)
-        print(form)
-        if form.is_valid():
-            form.save()
-    form = CreationModule()
-    print(form)
-    return render(request, 'main/teacher-personal.html', {"form": form})
-
-
 def user_login(request):
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
@@ -43,7 +32,7 @@ def user_login(request):
             login(request, user)
             # if user.choice_field == '1':
             #    return redirect('personal_account')
-            #else:
+            # else:
             return redirect('home')
     else:
         form = UserLoginForm()
@@ -53,7 +42,44 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('home')
-# def student_personal(request):
+
+
+def create_module(request):
+    print(request)
+    if 'add' in request.POST:
+        form = CreationModule(request.POST)
+        print(11)
+        print(form)
+        if form.is_valid():
+            form.save()
+    form = CreationModule()
+    if form.has_changed():
+        print(2)
+    print(1, form)
+    return render(request, 'main/teacher-personal.html', {"form": form})
+
+
+# def create_course(request):
+#     if 'add-course' in request.POST:
+#         form = CreationModule(request.POST)
+#
+#         print(form)
+#         if form.is_valid():
+#             form.save()
+#     form = CreationModule()
+#     print(form)
+#     return render(request, 'main/teacher-personal.html', {"form": form})
+
+
+def form(request):
+    if request.method == 'POST':
+        form = CreationModule(request.POST)
+        print(form)
+        if form.is_valid():
+            form.save()
+    form = CreationModule()
+    print(form)
+    return render(request, 'main/form.html', {"form": form})
 
 
 def index(request):
@@ -61,23 +87,19 @@ def index(request):
     return render(request, 'main/index.html', {'title': 'Главная страница сайта', 'tasks': tasks})
 
 
-def create_module(request):
-    pass
-
-
 def personal_account(request):
     # print(request.user)
     if request.user.choice_field == '1':
-        module = Module.objects.all()
-        name_course = Course.objects.all
-        context = {
-            'module': module,
-            'name_course': name_course
-        }
-        return render(request, 'main/student-personal.html', context)
+        # module = Module.objects.all()
+        # name_course = Course.objects.all
+        # context = {
+        #     'module': module,
+        #     'name_course': name_course,
+        # }
+        return render(request, 'main/student-personal.html')
 
     else:
-        return render(request, 'main/teacher-personal.html')
+        return redirect('teacher')
 
 
 def about(request):
@@ -90,7 +112,7 @@ def create(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            # return redirect('home')
         else:
             error = 'Форма была некорректной'
 
@@ -100,7 +122,3 @@ def create(request):
         'error': error
     }
     return render(request, 'main/create.html', context)
-
-
-
-
