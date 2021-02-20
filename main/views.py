@@ -56,7 +56,7 @@ def create_module(request):
             course_id=Course(name=formCourse.name1),
             module_id =Module(name=form.name))
         MC.save()
-        бесполезный коммит
+
 
     form = CreationModule()
     formCourse = CreationCourse()
