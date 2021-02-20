@@ -57,6 +57,7 @@ def create_module(request):
             module_id =Module(name=form.name))
         MC.save()
 
+
     form = CreationModule()
     formCourse = CreationCourse()
 
