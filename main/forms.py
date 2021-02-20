@@ -49,22 +49,28 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CreationModule(ModelForm):
+    DONE = {
+        ('0', 'START'),
+        ('1', 'CONTINUE'),
+        ('2', 'STOP')
+    }
     name = forms.CharField(label='Название модуля', widget=forms.TextInput(attrs={'class': 'name'}))
+    status = forms.ChoiceField(widget=forms.Select, choices=DONE)
     # name_course = forms.CharField(label='Название курса', widget=forms.TextInput(attrs={'class': 'name'}))
 
     class Meta:
         model = Module
-        fields = ['name']
+        fields = ['name', 'status']
 
 
 class CreationCourse(ModelForm):
-    name = forms.CharField(label='Название курса', widget=forms.TextInput(attrs={'class': 'name'}))
-    information = forms.CharField(label='Ссылка на видеоурок', widget=forms.TextInput(attrs={'class': 'name'}))
-    cases = forms.ChoiceField(widget=forms.Select, choices=STATUS)
+    name1 = forms.CharField(label='Название курса', widget=forms.TextInput(attrs={'class': 'name1'}))
+    information = forms.CharField(label='Ссылка на видеоурок', widget=forms.TextInput(attrs={'class': 'inf'}))
+    # cases = forms.ChoiceField(widget=forms.Select, choices=STATUS)
 
     class Meta:
         model = Course
-        fields = ['name', 'information', 'cases']
+        fields = ['name1', 'information']
 
 
 class TaskForm(ModelForm):

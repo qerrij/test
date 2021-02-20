@@ -57,21 +57,18 @@
                     {% csrf_token %}
                     <p>Название модуля</p>
                     {{ form.name }}
+                    {{ form.status }}
 <!--                    <input type="text">-->
-                    <button type="submit" name="add">Добавить</button>
-                    </form>
-
-                    <form method="post">
                         {% csrf_token %}
                             <p>Название курса</p>
-                        {{form.name}}
+                        {{formCourse.name1}}
                             <p>Загрузите ссылку на видео(информация)</p>
-                        {{ form.information }}
+                        {{ formCourse.information }}
                             <p>Создайте кейсы для выполнения заданий учеником</p>
-                        {{ form.cases }}
+<!--                        {{ formCourse.cases }}-->
 <!--                            <button>Добавить кейсы</button>-->
                             <p><-- Дальше список уже подготовленных вопросов, пока учитель сам их придумывать не может)) --> </p>
-                        <button>Создать курс</button>
+                        <button name="add">Создать курс</button>
                         </form>
             </article>
         </main>

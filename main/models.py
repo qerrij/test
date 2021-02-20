@@ -45,7 +45,7 @@ class Course(models.Model):
     cases = models.ForeignKey(
         'Cases',
         on_delete=models.CASCADE)
-    name = models.TextField()
+    name1 = models.TextField()
     information = models.TextField()
     # project = models.ForeignKey(
     #     'Project',
@@ -69,17 +69,23 @@ class Module(models.Model):
         ('1', 'CONTINUE'),
         ('2', 'STOP')
     }
-    # quantity = models.IntegerField()
-    # courses = []
-    # def create_courses(self, ):
-    #     self.courses.append(Course)
-
-    course = models.ForeignKey(
-        'Course',
-        related_name='first_course',
-        on_delete=models.CASCADE)
+    # course = models.ForeignKey(
+    #     'Course',
+    #     # related_name='first_course',
+    #     on_delete=models.CASCADE)
     name = models.CharField('Название', max_length=50)
     status = models.TextField(choices=DONE)
+
+
+class ModuleCourse(models.Model):
+    course_id = models.ForeignKey(
+        'Course',
+        on_delete=models.CASCADE
+    )
+    module_id = models.ForeignKey(
+        'Module',
+        on_delete=models.CASCADE
+    )
 
 
 class Task(models.Model):
