@@ -40,7 +40,6 @@ class Project(models.Model):
 
 
 class Course(models.Model):
-    # course_id = models.AutoField(primary_key=True)
     #поставил отношения один ко многим
     cases = models.ForeignKey(
         'Cases',

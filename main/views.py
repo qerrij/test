@@ -52,17 +52,27 @@ def create_module(request):
             form.save()
         if formCourse.is_valid():
             formCourse.save()
+        print(formCourse)
+        # print(form.cleaned_data['name'])
         MC=ModuleCourse(
-            course_id=Course(name=formCourse.name1),
-            module_id =Module(name=form.name))
+            # course_id=Course.objects.get(name1=formCourse.cleaned_data['name1']),
+            course_id=Course.objects.last(),
+            module_id=Module.objects.last())
         MC.save()
-
-
     form = CreationModule()
     formCourse = CreationCourse()
-
     return render(request, 'main/teacher-personal.html', {"form": form, "formCourse": formCourse})
-
+    # if 'add-course' in request.POST:
+    #     formCourse = CreationCourse(request.POST)
+    #     if formCourse.is_valid():
+    #         formCourse.save()
+    #     obj = Course.objects.last()
+    #     MC = ModuleCourse(
+    #         course_id=getattr(obj, 'name1'),
+    #         module_id=getattr(obj2, 'name'))
+    #     MC.save()
+    # formCourse = CreationCourse()
+    # return render(request, 'main/teacher-personal.html', {"form": form, "formCourse": formCourse})
 
 # def create_course(request):
 #     if 'add-course' in request.POST:
@@ -71,16 +81,6 @@ def create_module(request):
 #             formCourse.save()
 #     formCourse = CreationCourse()
 #     return render(request, 'main/teacher-personal.html', {"form": formCourse})
-
-
-# def form(request):
-#     if request.method == 'POST':
-#         formCourse = CreationModule(request.POST)
-#         print(form)
-#         if formCourse.is_valid():
-#             formCourse.save()
-#     formCourse = CreationModule()
-#     return render(request, 'main/form.html', {"form": formCourse})
 
 
 def index(request):
