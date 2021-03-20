@@ -69,6 +69,7 @@ def create_module(request):
 def create_course(request):
     if 'add-course' in request.POST:
         formCourse = CreationCourse(request.POST)
+        print(formCourse)
         if formCourse.is_valid():
             formCourse.save()
         # print(Course.objects.filter(name1=formCourse.cleaned_data['name1']))
@@ -78,7 +79,7 @@ def create_course(request):
         #     module_id=Module.objects.last(name=form.cleaned_data['name']))
         # MC.save()
     formCourse = CreationCourse()
-    return render(request, 'main/create-course.html', {"form": formCourse})
+    return render(request, 'main/create-course.html', {"formCourse": formCourse})
 
 
 def index(request):
