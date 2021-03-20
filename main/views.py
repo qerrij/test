@@ -52,35 +52,33 @@ def create_module(request):
             form.save()
         if formCourse.is_valid():
             formCourse.save()
-        print(formCourse)
+        print(Course.objects.filter(name1=formCourse.cleaned_data['name1']).order_by('-id')[:1][0])
         # print(form.cleaned_data['name'])
         MC=ModuleCourse(
             # course_id=Course.objects.get(name1=formCourse.cleaned_data['name1']),
-            course_id=Course.objects.last(),
-            module_id=Module.objects.last())
+            # course_id=Course.objects.last(),
+            # module_id=Module.objects.last())
+            course_id=Course.objects.filter(name1=formCourse.cleaned_data['name1']).order_by('-id')[:1][0],
+            module_id=Module.objects.filter(name=form.cleaned_data['name']).order_by('-id')[:1][0])
         MC.save()
     form = CreationModule()
     formCourse = CreationCourse()
-    return render(request, 'main/teacher-personal.html', {"form": form, "formCourse": formCourse})
-    # if 'add-course' in request.POST:
-    #     formCourse = CreationCourse(request.POST)
-    #     if formCourse.is_valid():
-    #         formCourse.save()
-    #     obj = Course.objects.last()
-    #     MC = ModuleCourse(
-    #         course_id=getattr(obj, 'name1'),
-    #         module_id=getattr(obj2, 'name'))
-    #     MC.save()
-    # formCourse = CreationCourse()
-    # return render(request, 'main/teacher-personal.html', {"form": form, "formCourse": formCourse})
+    return render(request,   'main/teacher-personal.html', {"form": form, "formCourse": formCourse})
 
-# def create_course(request):
-#     if 'add-course' in request.POST:
-#         formCourse = CreationCourse(request.POST)
-#         if formCourse.is_valid():
-#             formCourse.save()
-#     formCourse = CreationCourse()
-#     return render(request, 'main/teacher-personal.html', {"form": formCourse})
+
+def create_course(request):
+    if 'add-course' in request.POST:
+        formCourse = CreationCourse(request.POST)
+        if formCourse.is_valid():
+            formCourse.save()
+        # print(Course.objects.filter(name1=formCourse.cleaned_data['name1']))
+        # MC=ModuleCourse(
+        #     course_id=Course.objects.get(name1=formCourse.cleaned_data['name1']),
+        #     course_id=Course.objects.filter(name1=formCourse.cleaned_data['name1']),
+        #     module_id=Module.objects.last(name=form.cleaned_data['name']))
+        # MC.save()
+    formCourse = CreationCourse()
+    return render(request, 'main/create-course.html', {"form": formCourse})
 
 
 def index(request):
@@ -89,14 +87,7 @@ def index(request):
 
 
 def personal_account(request):
-    # print(request.user)
     if request.user.choice_field == '1':
-        # module = Module.objects.all()
-        # name_course = Course.objects.all
-        # context = {
-        #     'module': module,
-        #     'name_course': name_course,
-        # }
         return render(request, 'main/student-personal.html')
 
     else:

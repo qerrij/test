@@ -11,5 +11,6 @@ urlpatterns = [
     path('about', views.about, name='about'),
     path('create', views.create, name='create'),
     path('personal_account', views.personal_account, name='personal_account'),
-    path('teacher', views.create_module, name='teacher')
+    path('teacher', views.create_module, name='teacher'),
+    path('create-course', views.create_course, name='create-course')
 ]

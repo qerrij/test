@@ -74,8 +74,10 @@
 <!--                    {% csrf_token %}-->
 <!--                    <p>Название курса</p>-->
 <!--                    {{formCourse.name1}}-->
+<!--                     {{ formCourse.information }}-->
 <!--                    <button name="add-course">Создать курс</button>-->
 <!--                </form>-->
+                <a href="{% url 'create-course' %}">Создать курс</a>
             </article>
         </main>
     </body>
