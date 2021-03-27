@@ -147,6 +147,14 @@
                Реализация</h4>
         </div>
      </article>
+     <article>
+         <h1>Курсы, которые добавил "учитель":</h1>
+         <ul>
+             {% for d in course %}
+                <li>{{ d.name1 }}</li>
+            {% endfor %}
+         </ul>
+     </article>
     </main>
         {% endblock %}
 </body>

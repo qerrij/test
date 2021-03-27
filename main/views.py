@@ -73,23 +73,27 @@ def create_course(request):
         if formCourse.is_valid():
             formCourse.save()
         # print(Course.objects.filter(name1=formCourse.cleaned_data['name1']))
-        # MC=ModuleCourse(
-        #     course_id=Course.objects.get(name1=formCourse.cleaned_data['name1']),
-        #     course_id=Course.objects.filter(name1=formCourse.cleaned_data['name1']),
-        #     module_id=Module.objects.last(name=form.cleaned_data['name']))
-        # MC.save()
+        MC=ModuleCourse(
+            course_id=Course.objects.filter(name1=formCourse.cleaned_data['name1']).order_by('-id')[:1][0],
+            module_id=Module.objects.last())
+        MC.save()
     formCourse = CreationCourse()
     return render(request, 'main/create-course.html', {"formCourse": formCourse})
 
 
 def index(request):
     tasks = Task.objects.order_by('-id')
-    return render(request, 'main/index.html', {'title': 'Главная страница сайта', 'tasks': tasks})
+    return render(request, 'main/index.html')
 
 
 def personal_account(request):
     if request.user.choice_field == '1':
-        return render(request, 'main/student-personal.html')
+        mod = Module.objects.last()
+        course = ModuleCourse.objects.filter(module_id=mod)
+        course = Course.objects.raw(
+            'SELECT main_course.name1, main_course.id FROM main_course JOIN (SELECT main_modulecourse.course_id_id FROM   main_module  JOIN main_modulecourse  ON %s = main_module.id and main_modulecourse.module_id_id = 107) MC ON MC.course_id_id = main_course.id',
+            [mod.id])
+        return render(request, 'main/student-personal.html', {'course': course})
 
     else:
         return redirect('teacher')

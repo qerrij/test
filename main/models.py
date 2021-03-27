@@ -2,12 +2,12 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django import forms
 
+STATUS = (
+    ('1', 'Ученик'),
+    ('2', 'Учитель')
+)
 
 class CustomUser(AbstractUser):
-    STATUS = (
-        ('1', 'Ученик'),
-        ('2', 'Учитель')
-    )
     # id = models.AutoField(primary_key=True)
     # username = models.TextField()
     # choice_field = models.TextField()
