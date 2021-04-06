@@ -56,17 +56,22 @@ class CreationModule(ModelForm):
     }
     name = forms.CharField(label='Название модуля', widget=forms.TextInput(attrs={'class': 'name'}))
     status = forms.ChoiceField(widget=forms.Select, choices=DONE)
-    # name_course = forms.CharField(label='Название курса', widget=forms.TextInput(attrs={'class': 'name'}))
-
     class Meta:
         model = Module
         fields = ['name', 'status']
 
 
+class FriendForm(ModelForm):
+
+    # user = forms.ChoiceField(widget=forms.Select, choices=CustomUser.username)
+    # friend = forms.ChoiceField(widget=forms.Select, choices=users)
+    class Meta:
+        model = Friend
+        fields = ['user', 'friend']
+
 class CreationCourse(ModelForm):
     name1 = forms.CharField(label='Название курса', widget=forms.TextInput(attrs={'class': 'name1'}))
     information = forms.CharField(label='Ссылка на видеоурок', widget=forms.TextInput(attrs={'class': 'inf'}))
-    # cases = forms.ChoiceField(widget=forms.Select, choices=STATUS)
 
     class Meta:
         model = Course

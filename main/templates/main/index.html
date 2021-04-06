@@ -24,6 +24,14 @@
     {% else %}
         <p>У нас нет записей</p>
     {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <p>1</p>
+            {{ form.user }}
+        <p>2</p>
+            {{form.friend}}
+        <button name="add-friend">Добавить в друзья</button>
+    </form>
 {% endblock %}
 
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
-from .forms import TaskForm, CreationModule, CreationCourse
+from .forms import TaskForm, CreationModule, CreationCourse, FriendForm
 from django.contrib import messages
 from .forms import CustomUserCreationForm, UserLoginForm
 from django.contrib.auth import login, logout
@@ -53,14 +53,13 @@ def create_module(request):
         if formCourse.is_valid():
             formCourse.save()
         print(Course.objects.filter(name1=formCourse.cleaned_data['name1']).order_by('-id')[:1][0])
-        # print(form.cleaned_data['name'])
+        a = Module.objects.filter(name=form.cleaned_data['name']).order_by('-id')[:1][0]
+        a.save()
         MC=ModuleCourse(
-            # course_id=Course.objects.get(name1=formCourse.cleaned_data['name1']),
-            # course_id=Course.objects.last(),
-            # module_id=Module.objects.last())
             course_id=Course.objects.filter(name1=formCourse.cleaned_data['name1']).order_by('-id')[:1][0],
             module_id=Module.objects.filter(name=form.cleaned_data['name']).order_by('-id')[:1][0])
         MC.save()
+        
     form = CreationModule()
     formCourse = CreationCourse()
     return render(request,   'main/teacher-personal.html', {"form": form, "formCourse": formCourse})
@@ -82,8 +81,13 @@ def create_course(request):
 
 
 def index(request):
-    tasks = Task.objects.order_by('-id')
-    return render(request, 'main/index.html')
+    if 'add-friend' in request.POST:
+        form = FriendForm(request.POST)
+        if form.is_valid():
+            form.save()
+    form = FriendForm()
+    print(request.user)
+    return render(request, 'main/index.html', {'form': form})
 
 
 def personal_account(request):

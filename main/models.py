@@ -22,16 +22,21 @@ class CustomUser(AbstractUser):
         return template.format(self)
 
 
+class Friend(models.Model):
+    user = models.ForeignKey(
+        'CustomUser',
+        on_delete=models.CASCADE)
+    friend = models.ForeignKey(
+        'CustomUser',
+        related_name="friends",
+        on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+
+
 class Cases(models.Model):
     task = models.TextField()
     answer_option = models.TextField()
     answer = models.IntegerField()
-
-
-# class try_to_die(models.Model):
-#     cases = models.OneToOneField(
-#         'Cases',
-#         on_delete=models.CASCADE)
 
 
 class Project(models.Model):
@@ -46,9 +51,6 @@ class Course(models.Model):
         on_delete=models.CASCADE)
     name1 = models.TextField()
     information = models.TextField()
-    # project = models.ForeignKey(
-    #     'Project',
-    #     on_delete=models.CASCADE)
 
 
 class CourseCase(models.Model):
@@ -68,12 +70,22 @@ class Module(models.Model):
         ('1', 'CONTINUE'),
         ('2', 'STOP')
     }
-    # course = models.ForeignKey(
-    #     'Course',
-    #     # related_name='first_course',
-    #     on_delete=models.CASCADE)
     name = models.CharField('Название', max_length=50)
     status = models.TextField(choices=DONE)
+    author = models.ForeignKey(
+        'CustomUser',
+        on_delete=models.CASCADE
+    )
+
+    def get_author(self):
+        return self.author
+    def set_author(self,user):
+        try:
+            self.author = user
+            return 1
+        except:
+            self.author = None
+            return 0
 
 
 class ModuleCourse(models.Model):

@@ -6,6 +6,14 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import *
 
 
+# def add_rote():
+
+
+
+class No_rote(admin.ModelAdmin):
+    actions = []
+
+
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
@@ -14,6 +22,7 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Module)
+admin.site.register(Friend)
 admin.site.register(Course)
 admin.site.register(Cases)
 admin.site.register(Project)

@@ -135,11 +135,13 @@
          <ol>
             <li>Пункт 3</li>
                <ol>
-                   <li>Актуализация</li>
-                   <li>Проблематизация</li>
-                   <li>Целеполагание</li>
-                   <li>Концептуализация</li>
-                   <li>Планирование</li>
+                   {% for d in course %}
+                   <li>{{ d.name1 }}</li>
+<!--                   <li>Проблематизация</li>-->
+<!--                   <li>Целеполагание</li>-->
+<!--                   <li>Концептуализация</li>-->
+<!--                   <li>Планирование</li>-->
+                   {% endfor %}
                </ol>
         </ol>
         <div class="folder-third">
@@ -147,14 +149,14 @@
                Реализация</h4>
         </div>
      </article>
-     <article>
-         <h1>Курсы, которые добавил "учитель":</h1>
-         <ul>
-             {% for d in course %}
-                <li>{{ d.name1 }}</li>
-            {% endfor %}
-         </ul>
-     </article>
+<!--     <article>-->
+<!--         <h1>Курсы, которые добавил "учитель":</h1>-->
+<!--         <ul>-->
+<!--&lt;!&ndash;             {% for d in course %}&ndash;&gt;-->
+<!--&lt;!&ndash;                <li>{{ d.name1 }}</li>&ndash;&gt;-->
+<!--&lt;!&ndash;            {% endfor %}&ndash;&gt;-->
+<!--         </ul>-->
+<!--     </article>-->
     </main>
         {% endblock %}
 </body>
