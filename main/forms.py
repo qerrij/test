@@ -68,6 +68,14 @@ class FriendForm(ModelForm):
     class Meta:
         model = Friend
         fields = ['user', 'friend']
+    # def __init__(self, user,*args, **kwargs):
+    #     super(ModelForm, self).__init__(*args, **kwargs)
+    #     try:
+    #         a=int(user.id)
+    #         print(a)
+    #     except: a=1
+    #     self.initial['user']=CustomUser.objects.filter(id=a)[:1][0]
+    #     self.fields['friend'].empty_label = 'Please Select'
 
 class CreationCourse(ModelForm):
     name1 = forms.CharField(label='Название курса', widget=forms.TextInput(attrs={'class': 'name1'}))

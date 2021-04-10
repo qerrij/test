@@ -28,7 +28,7 @@ def user_login(request):
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
-            print(user)
+            # print(user)
             login(request, user)
             # if user.choice_field == '1':
             #    return redirect('personal_account')
@@ -52,14 +52,14 @@ def create_module(request):
             form.save()
         if formCourse.is_valid():
             formCourse.save()
-        print(Course.objects.filter(name1=formCourse.cleaned_data['name1']).order_by('-id')[:1][0])
+        # print(Module.objects.filter(name=formCourse.cleaned_data['name']).exclude(author=request.user).order_by('-id')[:1][0])
         a = Module.objects.filter(name=form.cleaned_data['name']).order_by('-id')[:1][0]
+        c = a.set_author(user=request.user)
         a.save()
         MC=ModuleCourse(
             course_id=Course.objects.filter(name1=formCourse.cleaned_data['name1']).order_by('-id')[:1][0],
             module_id=Module.objects.filter(name=form.cleaned_data['name']).order_by('-id')[:1][0])
         MC.save()
-        
     form = CreationModule()
     formCourse = CreationCourse()
     return render(request,   'main/teacher-personal.html', {"form": form, "formCourse": formCourse})
@@ -68,13 +68,13 @@ def create_module(request):
 def create_course(request):
     if 'add-course' in request.POST:
         formCourse = CreationCourse(request.POST)
-        print(formCourse)
         if formCourse.is_valid():
             formCourse.save()
         # print(Course.objects.filter(name1=formCourse.cleaned_data['name1']))
+        print(Module.objects.filter(author=request.user))
         MC=ModuleCourse(
             course_id=Course.objects.filter(name1=formCourse.cleaned_data['name1']).order_by('-id')[:1][0],
-            module_id=Module.objects.last())
+            module_id=Module.objects.filter(author=request.user).order_by('-id')[:1][0])
         MC.save()
     formCourse = CreationCourse()
     return render(request, 'main/create-course.html', {"formCourse": formCourse})
@@ -83,10 +83,14 @@ def create_course(request):
 def index(request):
     if 'add-friend' in request.POST:
         form = FriendForm(request.POST)
+        print(form.data)
         if form.is_valid():
             form.save()
+            print('save')
+        else:
+            print(form.errors,'________')
     form = FriendForm()
-    print(request.user)
+    form.initial['user'] = CustomUser.objects.filter(id=request.user.id)[0]
     return render(request, 'main/index.html', {'form': form})
 
 
