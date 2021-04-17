@@ -83,14 +83,14 @@ def create_course(request):
 def index(request):
     if 'add-friend' in request.POST:
         form = FriendForm(request.POST)
-        print(form.data)
         if form.is_valid():
             form.save()
-            print('save')
-        else:
-            print(form.errors,'________')
+        #     print('save')
+        # else:
+        #     print(form.errors,'________')
     form = FriendForm()
-    form.initial['user'] = CustomUser.objects.filter(id=request.user.id)[0]
+    if request.user.is_authenticated == True:
+        form.initial['user'] = CustomUser.objects.filter(id=request.user.id)[0]
     return render(request, 'main/index.html', {'form': form})
 
 
@@ -99,12 +99,21 @@ def personal_account(request):
         mod = Module.objects.last()
         course = ModuleCourse.objects.filter(module_id=mod)
         course = Course.objects.raw(
-            'SELECT main_course.name1, main_course.id FROM main_course JOIN (SELECT main_modulecourse.course_id_id FROM   main_module  JOIN main_modulecourse  ON %s = main_module.id and main_modulecourse.module_id_id = 107) MC ON MC.course_id_id = main_course.id',
-            [mod.id])
+            'SELECT main_course.name1, main_course.id FROM main_course JOIN (SELECT main_modulecourse.course_id_id FROM   main_module  JOIN main_modulecourse  ON %s = main_module.id and main_modulecourse.module_id_id = %s) MC ON MC.course_id_id = main_course.id',
+            [mod.id, mod.id])
         return render(request, 'main/student-personal.html', {'course': course})
 
     else:
         return redirect('teacher')
+
+
+def detail_page(request, id):
+    get_article = Module.objects.get(id=id)
+    context = {
+        'get_article': get_article
+    }
+    template = 'detail.html'
+    return render(request, 'main/about.html')
 
 
 def about(request):

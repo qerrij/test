@@ -62,20 +62,20 @@ class CreationModule(ModelForm):
 
 
 class FriendForm(ModelForm):
-
-    # user = forms.ChoiceField(widget=forms.Select, choices=CustomUser.username)
+    # users = [i.username for i in CustomUser.objects.raw('SELECT id FROM main_customuser')]
+    # print(users)
+    # user = forms.ChoiceField()
+    # friend = forms.ChoiceField(widget=forms.Select, choices=users)
     # friend = forms.ChoiceField(widget=forms.Select, choices=users)
     class Meta:
+        users = [i.username for i in CustomUser.objects.raw('SELECT id FROM main_customuser')]
+        print(users)
         model = Friend
         fields = ['user', 'friend']
-    # def __init__(self, user,*args, **kwargs):
-    #     super(ModelForm, self).__init__(*args, **kwargs)
-    #     try:
-    #         a=int(user.id)
-    #         print(a)
-    #     except: a=1
-    #     self.initial['user']=CustomUser.objects.filter(id=a)[:1][0]
-    #     self.fields['friend'].empty_label = 'Please Select'
+        widgets = {
+            'user': forms.HiddenInput(),
+            'friend': forms.Select(choices=users)
+        }
 
 class CreationCourse(ModelForm):
     name1 = forms.CharField(label='Название курса', widget=forms.TextInput(attrs={'class': 'name1'}))

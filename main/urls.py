@@ -12,5 +12,6 @@ urlpatterns = [
     path('create', views.create, name='create'),
     path('personal_account', views.personal_account, name='personal_account'),
     path('teacher', views.create_module, name='teacher'),
-    path('create-course', views.create_course, name='create-course')
+    path('create-course', views.create_course, name='create-course'),
+    path('detail/<int:id>', views.detail_page, name='detail_page')
 ]

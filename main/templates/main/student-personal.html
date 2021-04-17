@@ -128,14 +128,15 @@
                Реализация </h4>
         </div>
      </article>
+     {% for e in course %}
      <article class="screen3">
          <div class="third">
-            <a>CONTINUE</a>
+            <a href="/detail/{{e.id}}"></a>
         </div>
          <ol>
             <li>Пункт 3</li>
                <ol>
-                   {% for d in course %}
+                   {% for d in e %}
                    <li>{{ d.name1 }}</li>
 <!--                   <li>Проблематизация</li>-->
 <!--                   <li>Целеполагание</li>-->
@@ -149,6 +150,7 @@
                Реализация</h4>
         </div>
      </article>
+     {% endfor %}
 <!--     <article>-->
 <!--         <h1>Курсы, которые добавил "учитель":</h1>-->
 <!--         <ul>-->
