@@ -131,18 +131,18 @@
      {% for e in course %}
      <article class="screen3">
          <div class="third">
-            <a href="/detail/{{e.id}}"></a>
+            <a href="/detail/{{e.id}}">lkakadkl;</a>
         </div>
          <ol>
             <li>Пункт 3</li>
                <ol>
-                   {% for d in e %}
+                   {% for d in course %}
                    <li>{{ d.name1 }}</li>
 <!--                   <li>Проблематизация</li>-->
 <!--                   <li>Целеполагание</li>-->
 <!--                   <li>Концептуализация</li>-->
 <!--                   <li>Планирование</li>-->
-                   {% endfor %}
+<!--                   {% endfor %}-->
                </ol>
         </ol>
         <div class="folder-third">
@@ -154,12 +154,12 @@
 <!--     <article>-->
 <!--         <h1>Курсы, которые добавил "учитель":</h1>-->
 <!--         <ul>-->
-<!--&lt;!&ndash;             {% for d in course %}&ndash;&gt;-->
-<!--&lt;!&ndash;                <li>{{ d.name1 }}</li>&ndash;&gt;-->
-<!--&lt;!&ndash;            {% endfor %}&ndash;&gt;-->
+<!--             {% for d in course %}-->
+<!--                <li>{{ d.name1 }}</li>-->
+<!--            {% endfor %}-->
 <!--         </ul>-->
 <!--     </article>-->
-    </main>
+<!--    </main>-->
         {% endblock %}
 </body>
 </html>

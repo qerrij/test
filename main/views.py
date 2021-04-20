@@ -71,7 +71,6 @@ def create_course(request):
         if formCourse.is_valid():
             formCourse.save()
         # print(Course.objects.filter(name1=formCourse.cleaned_data['name1']))
-        print(Module.objects.filter(author=request.user))
         MC=ModuleCourse(
             course_id=Course.objects.filter(name1=formCourse.cleaned_data['name1']).order_by('-id')[:1][0],
             module_id=Module.objects.filter(author=request.user).order_by('-id')[:1][0])
@@ -97,10 +96,21 @@ def index(request):
 def personal_account(request):
     if request.user.choice_field == '1':
         mod = Module.objects.last()
-        course = ModuleCourse.objects.filter(module_id=mod)
+        # course = ModuleCourse.objects.filter(module_id=mod)
+        s = request.user
+        c = Friend.objects.raw(
+            'SELECT main_friend.id, main_friend.user_id FROM main_friend WHERE main_friend.friend_id = %s', [s.id]
+        )
+        b = c[0].user_id
+        a = CustomUser.objects.raw(
+            'SELECT main_customuser.id FROM main_customuser WHERE main_customuser.id = %s', [b]
+        )
         course = Course.objects.raw(
             'SELECT main_course.name1, main_course.id FROM main_course JOIN (SELECT main_modulecourse.course_id_id FROM   main_module  JOIN main_modulecourse  ON %s = main_module.id and main_modulecourse.module_id_id = %s) MC ON MC.course_id_id = main_course.id',
             [mod.id, mod.id])
+        module = Module.objects.filter(author=a[0])
+        for i in module:
+            print(module.course)
         return render(request, 'main/student-personal.html', {'course': course})
 
     else:
@@ -113,7 +123,7 @@ def detail_page(request, id):
         'get_article': get_article
     }
     template = 'detail.html'
-    return render(request, 'main/about.html')
+    return render(request, 'main/about.html', context)
 
 
 def about(request):
