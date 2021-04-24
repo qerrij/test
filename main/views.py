@@ -90,6 +90,7 @@ def index(request):
     form = FriendForm()
     if request.user.is_authenticated == True:
         form.initial['user'] = CustomUser.objects.filter(id=request.user.id)[0]
+
     return render(request, 'main/index.html', {'form': form})
 
 
@@ -110,7 +111,7 @@ def personal_account(request):
             [mod.id, mod.id])
         module = Module.objects.filter(author=a[0])
         for i in module:
-            print(module.course)
+            print(module)
         return render(request, 'main/student-personal.html', {'course': course})
 
     else:

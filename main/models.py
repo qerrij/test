@@ -99,6 +99,17 @@ class ModuleCourse(models.Model):
     )
 
 
+class StudentModule(models.Model):
+    student = models.ForeignKey(
+        'CustomUser',
+        on_delete=models.CASCADE
+    )
+    module_id = models.ForeignKey(
+        'Module',
+        on_delete=models.CASCADE
+    )
+
+
 class Task(models.Model):
     title = models.CharField('Название', max_length=50)
     # name = models.CharField('Имя', max_length=50)

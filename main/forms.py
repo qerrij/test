@@ -86,6 +86,15 @@ class CreationCourse(ModelForm):
         fields = ['name1', 'information']
 
 
+class ConnectModule(ModelForm):
+    student = forms.ChoiceField(widget=forms.Select, choices=CustomUser)
+    module_id = forms.ChoiceField(widget=forms.Select, choices=Module)
+
+    class Meta:
+        model = StudentModule
+        fields = ['student', 'module_id']
+
+
 class TaskForm(ModelForm):
     class Meta:
         model = Task
