@@ -128,28 +128,39 @@
                Реализация </h4>
         </div>
      </article>
-     {% for e in course %}
+     {% for m in mod %}
      <article class="screen3">
          <div class="third">
-            <a href="/detail/{{e.id}}">lkakadkl;</a>
-        </div>
+             {% for m1 in m %}
+            <a href="/detail/{{e.id}}">{{m1.status}}</a>
+             {% endfor %}
+         </div>
          <ol>
+
             <li>Пункт 3</li>
                <ol>
-                   {% for d in course %}
+     {% for i in course%}
+
+
+
+
+                   {% for d in step %}
                    <li>{{ d.name1 }}</li>
-<!--                   <li>Проблематизация</li>-->
-<!--                   <li>Целеполагание</li>-->
-<!--                   <li>Концептуализация</li>-->
-<!--                   <li>Планирование</li>-->
-<!--                   {% endfor %}-->
+<!--&lt;!&ndash;                   <li>Проблематизация</li>&ndash;&gt;-->
+<!--&lt;!&ndash;                   <li>Целеполагание</li>&ndash;&gt;-->
+<!--&lt;!&ndash;                   <li>Концептуализация</li>&ndash;&gt;-->
+<!--&lt;!&ndash;                   <li>Планирование</li>&ndash;&gt;-->
+<!--&lt;!&ndash;                   {% endfor %}&ndash;&gt;-->
                </ol>
-        </ol>
-        <div class="folder-third">
-           <h4>Модуль 3.<br>
-               Реализация</h4>
-        </div>
-     </article>
+<!--        </ol>-->
+<!--        <div class="folder-third">-->
+<!--           <h4>Модуль 3.<br>-->
+<!--               Реализация</h4>-->
+<!--        </div>-->
+        {% endfor %}
+     {% endfor %}
+     {% endfor %}
+          </article>
      {% endfor %}
 <!--     <article>-->
 <!--         <h1>Курсы, которые добавил "учитель":</h1>-->

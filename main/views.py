@@ -99,20 +99,28 @@ def personal_account(request):
         mod = Module.objects.last()
         # course = ModuleCourse.objects.filter(module_id=mod)
         s = request.user
-        c = Friend.objects.raw(
-            'SELECT main_friend.id, main_friend.user_id FROM main_friend WHERE main_friend.friend_id = %s', [s.id]
+        # c = Friend.objects.raw(
+        #     'SELECT main_friend.id, main_friend.user_id FROM main_friend WHERE main_friend.friend_id = %s', [s.id]
+        # )
+        # b = c[0].user_id
+        studentModules = StudentModule.objects.raw(
+            'SELECT main_studentmodule.id  FROM main_studentmodule WHERE main_studentmodule.student_id = %s', [s.id]
         )
-        b = c[0].user_id
-        a = CustomUser.objects.raw(
-            'SELECT main_customuser.id FROM main_customuser WHERE main_customuser.id = %s', [b]
-        )
-        course = Course.objects.raw(
-            'SELECT main_course.name1, main_course.id FROM main_course JOIN (SELECT main_modulecourse.course_id_id FROM   main_module  JOIN main_modulecourse  ON %s = main_module.id and main_modulecourse.module_id_id = %s) MC ON MC.course_id_id = main_course.id',
-            [mod.id, mod.id])
-        module = Module.objects.filter(author=a[0])
-        for i in module:
-            print(module)
-        return render(request, 'main/student-personal.html', {'course': course})
+        course= {}
+        for i in studentModules:
+            print(i.module_id_id)
+            course.update({Module.objects.raw('SELECT main_module.id FROM main_module WHERE main_module.id = %s',[i.module_id_id]) : Course.objects.raw(
+                'SELECT main_course.name1, main_course.id FROM main_course JOIN (SELECT main_modulecourse.course_id_id FROM   main_module  JOIN main_modulecourse  ON %s = main_module.id and main_modulecourse.module_id_id = %s) MC ON MC.course_id_id = main_course.id',
+                [i.module_id_id, i.module_id_id])})
+        # module = Module.objects.filter(author=b)
+        # for i in module:
+        #     print(module)
+        modul = course.keys()
+        course = course.values()
+
+
+
+        return render(request, 'main/student-personal.html', {'mod':modul,'course': course})
 
     else:
         return redirect('teacher')
