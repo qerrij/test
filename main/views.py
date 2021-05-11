@@ -104,23 +104,36 @@ def personal_account(request):
         # )
         # b = c[0].user_id
         studentModules = StudentModule.objects.raw(
-            'SELECT main_studentmodule.id  FROM main_studentmodule WHERE main_studentmodule.student_id = %s', [s.id]
+            'SELECT main_studentmodule.id, main_studentmodule.module_id_id  FROM main_studentmodule WHERE main_studentmodule.student_id = %s', [s.id]
         )
-        course= {}
+        course = {}
         for i in studentModules:
             print(i.module_id_id)
-            course.update({Module.objects.raw('SELECT main_module.id FROM main_module WHERE main_module.id = %s',[i.module_id_id]) : Course.objects.raw(
+            objectModule = Module.objects.raw('SELECT main_module.id FROM main_module WHERE main_module.id = %s',[i.module_id_id])
+            # for b in objectModule:
+            modul = objectModule[0]
+            print(modul)
+            cours = Course.objects.raw(
                 'SELECT main_course.name1, main_course.id FROM main_course JOIN (SELECT main_modulecourse.course_id_id FROM   main_module  JOIN main_modulecourse  ON %s = main_module.id and main_modulecourse.module_id_id = %s) MC ON MC.course_id_id = main_course.id',
-                [i.module_id_id, i.module_id_id])})
+                [i.module_id_id, i.module_id_id])
+            coursObj =[]
+            for b in cours:
+                coursObj.append(b)
+                print(b)
+            course.update({modul: coursObj})
+
+        #     course.update({Module.objects.raw('SELECT main_module.id FROM main_module WHERE main_module.id = %s',[i.module_id_id]) : Course.objects.raw(
+        #         'SELECT main_course.name1, main_course.id FROM main_course JOIN (SELECT main_modulecourse.course_id_id FROM   main_module  JOIN main_modulecourse  ON %s = main_module.id and main_modulecourse.module_id_id = %s) MC ON MC.course_id_id = main_course.id',
+        #         [i.module_id_id, i.module_id_id])})
         # module = Module.objects.filter(author=b)
         # for i in module:
         #     print(module)
-        modul = course.keys()
-        course = course.values()
+        # modul = course.keys()
+        # course = course.values()
 
+        keys = course.keys()
 
-
-        return render(request, 'main/student-personal.html', {'mod':modul,'course': course})
+        return render(request, 'main/student-personal.html', {'course':course})
 
     else:
         return redirect('teacher')

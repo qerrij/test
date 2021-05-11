@@ -76,7 +76,6 @@ class Module(models.Model):
         'CustomUser',
         on_delete=models.CASCADE
     )
-
     def get_author(self):
         return self.author
     def set_author(self,user):
