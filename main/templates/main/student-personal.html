@@ -128,41 +128,26 @@
                Реализация </h4>
         </div>
      </article>
-{% for key, value in course.items %}
-     <article class="screen3">
-         <div class="third">
+    {% for key, value in course.items %}
+         <article class="screen3">
+             <div class="third">
 
-            <a href="/detail/{{e.id}}">{{key.status}}</a>
+                <a href='/detail/{{key.id}}'>{{key.status}}</a>
 
-         </div>
-         <ol>
+             </div>
+             <ol>
 
-            <li>{{key.name}}</li>
-               <ol>
-                {% for d in value %}
-                        <li>{{ d.name1 }}</li>
-                    {% endfor %}
-<!--&lt;!&ndash;                   <li>Проблематизация</li>&ndash;&gt;-->
-<!--&lt;!&ndash;                   <li>Целеполагание</li>&ndash;&gt;-->
-<!--&lt;!&ndash;                   <li>Концептуализация</li>&ndash;&gt;-->
-<!--&lt;!&ndash;                   <li>Планирование</li>&ndash;&gt;-->
+                <li>{{key.name}}</li>
+                   <ol>
+                    {% for d in value %}
+                             <li>{{ d.name1 }}</li>
+                        {% endfor %}
+                   </ol>
+            </ol>
 
-               </ol>
-        </ol>
-
-          </article>
+              </article>
+<!--        -->
      {% endfor %}
-<!--     {% for key, value in course.items %}-->
-<!--     <article>-->
-<!--         <h1>{{key.name}}</h1>-->
-<!--         <ul>-->
-
-<!--             {% for d in value %}-->
-<!--                <li>{{ d.name1 }}</li>-->
-<!--            {% endfor %}-->
-<!--         </ul>-->
-<!--     </article>-->
-<!--     {% endfor %}-->
     </main>
         {% endblock %}
     </body>

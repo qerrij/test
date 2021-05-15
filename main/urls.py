@@ -13,5 +13,6 @@ urlpatterns = [
     path('personal_account', views.personal_account, name='personal_account'),
     path('teacher', views.create_module, name='teacher'),
     path('create-course', views.create_course, name='create-course'),
-    path('detail/<int:id>', views.detail_page, name='detail_page')
+    path('detail/<int:id>', views.detail_page, name='detail_page'),
+    path('detail_course/<int:id>', views.detail_course, name='detail_course')
 ]

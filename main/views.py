@@ -97,12 +97,7 @@ def index(request):
 def personal_account(request):
     if request.user.choice_field == '1':
         mod = Module.objects.last()
-        # course = ModuleCourse.objects.filter(module_id=mod)
         s = request.user
-        # c = Friend.objects.raw(
-        #     'SELECT main_friend.id, main_friend.user_id FROM main_friend WHERE main_friend.friend_id = %s', [s.id]
-        # )
-        # b = c[0].user_id
         studentModules = StudentModule.objects.raw(
             'SELECT main_studentmodule.id, main_studentmodule.module_id_id  FROM main_studentmodule WHERE main_studentmodule.student_id = %s', [s.id]
         )
@@ -121,18 +116,6 @@ def personal_account(request):
                 coursObj.append(b)
                 print(b)
             course.update({modul: coursObj})
-
-        #     course.update({Module.objects.raw('SELECT main_module.id FROM main_module WHERE main_module.id = %s',[i.module_id_id]) : Course.objects.raw(
-        #         'SELECT main_course.name1, main_course.id FROM main_course JOIN (SELECT main_modulecourse.course_id_id FROM   main_module  JOIN main_modulecourse  ON %s = main_module.id and main_modulecourse.module_id_id = %s) MC ON MC.course_id_id = main_course.id',
-        #         [i.module_id_id, i.module_id_id])})
-        # module = Module.objects.filter(author=b)
-        # for i in module:
-        #     print(module)
-        # modul = course.keys()
-        # course = course.values()
-
-        keys = course.keys()
-
         return render(request, 'main/student-personal.html', {'course':course})
 
     else:
@@ -141,11 +124,28 @@ def personal_account(request):
 
 def detail_page(request, id):
     get_article = Module.objects.get(id=id)
+    get_article.status = 1
+    print(get_article.status)
+    courses = Course.objects.raw(
+                'SELECT main_course.name1, main_course.id FROM main_course JOIN (SELECT main_modulecourse.course_id_id FROM   main_module  JOIN main_modulecourse  ON %s = main_module.id and main_modulecourse.module_id_id = %s) MC ON MC.course_id_id = main_course.id',
+                [get_article.id, get_article.id])
+    request_past = request.META.get('HTTP_REFERER')
     context = {
-        'get_article': get_article
+        'get_article': get_article,
+        'courses': courses,
+        'request_past': request_past
     }
-    template = 'detail.html'
-    return render(request, 'main/about.html', context)
+    template = 'main/detail.html'
+    return render(request, template,  context)
+
+
+def detail_course(request, id):
+    get_course = Course.objects.get(id=id)
+    context = {
+        'get_course': get_course,
+    }
+    template = 'main/detail_course.html'
+    return render(request, template,  context)
 
 
 def about(request):

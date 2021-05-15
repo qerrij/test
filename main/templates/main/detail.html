@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Название модуля:</h1>
+        {{get_article.name}}
+
+    <h1>Курсы:</h1>
+        <ol>
+            {% for i in courses %}
+            <li><a href = '/detail_course/{{i.id}}'>{{ i.name1 }}</a></li>
+            {% endfor %}
+        </ol>
+    <a href="{% url 'personal_account' %}"> Вернуться назад</a>
+</body>
+</html>
