@@ -41,7 +41,13 @@ class Cases(models.Model):
 
 class Project(models.Model):
     name = models.TextField()
-    content = models.TextField()
+    target = models.TextField()
+    hypotesis = models.TextField()
+    output = models.TextField()
+    author = models.ForeignKey(
+        'CustomUser',
+        on_delete=models.CASCADE
+    )
 
 
 class Course(models.Model):
@@ -105,6 +111,17 @@ class StudentModule(models.Model):
     )
     module_id = models.ForeignKey(
         'Module',
+        on_delete=models.CASCADE
+    )
+
+
+class StudentProject(models.Model):
+    student = models.ForeignKey(
+        'CustomUser',
+        on_delete=models.CASCADE
+    )
+    project = models.ForeignKey(
+        'Project',
         on_delete=models.CASCADE
     )
 

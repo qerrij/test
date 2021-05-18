@@ -97,15 +97,20 @@ class ConnectModule(ModelForm):
 
 class TaskForm(ModelForm):
     class Meta:
-        model = Task
-        fields = ["title", "task"]
+        model = Project
+        fields = ["name", "target", "hypotesis", "output"]
         widgets = {
-            "title": TextInput(attrs={
+            "name": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Введите название'
             }),
-            "task": Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите описание'
+            "target": Textarea(attrs={
+                'class': 'form-control'
+            }),
+            "hypotesis": Textarea(attrs={
+                'class': 'form-control'
+            }),
+            "output": Textarea(attrs={
+                'class': 'form-control'
             }),
         }

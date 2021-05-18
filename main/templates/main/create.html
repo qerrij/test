@@ -8,8 +8,10 @@
 <h1>Создать проект</h1>
 <form method="post">
     {% csrf_token %}
-    {{ form.title }}<br>
-    {{ form.task }}<br>
+    {{ form.name }}<br>
+    {{ form.target }}<br>
+    {{ form.hypotesis }}<br>
+    {{ form.output }}<br>
     <button type="submit" class="btn btn-success">Добавить</button>
     <span>{{ error }}</span>
 </form>

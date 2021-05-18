@@ -44,6 +44,11 @@ def user_logout(request):
     return redirect('home')
 
 
+def teacher_personal_area(request):
+    return render(request, 'main/teacher-personal-area.html')
+
+
+
 def create_module(request):
     if 'add' in request.POST:
         form = CreationModule(request.POST)
@@ -77,6 +82,14 @@ def create_course(request):
         MC.save()
     formCourse = CreationCourse()
     return render(request, 'main/create-course.html', {"formCourse": formCourse})
+
+
+def statistic(request):
+    user = request.user
+    students = Friend.objects.raw('SELECT main_friend.id, main_friend.friend_id FROM main_friend WHERE main_friend.user_id = %s', [user.id])
+    for i in students:
+        print(i.friend_id)
+    return render(request, 'main/statistic.html')
 
 
 def index(request):
@@ -125,7 +138,7 @@ def personal_account(request):
 def detail_page(request, id):
     get_article = Module.objects.get(id=id)
     get_article.status = 1
-    print(get_article.status)
+    get_article.save()
     courses = Course.objects.raw(
                 'SELECT main_course.name1, main_course.id FROM main_course JOIN (SELECT main_modulecourse.course_id_id FROM   main_module  JOIN main_modulecourse  ON %s = main_module.id and main_modulecourse.module_id_id = %s) MC ON MC.course_id_id = main_course.id',
                 [get_article.id, get_article.id])
@@ -154,6 +167,17 @@ def about(request):
 
 def create(request):
     error = ''
+    user = request.user
+    projects = Project.objects.raw = ('SELECT main_project.id FROM main_project WHERE main_project.author_id = %s', [user.id])
+    for i in projects:
+        print(i)
+        count = i[0]
+        print(count)
+    print(count)
+    if count > 0:
+        print("Проект есть")
+    else:
+        print("Проектов нет")
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
@@ -163,6 +187,8 @@ def create(request):
             error = 'Форма была некорректной'
 
     form = TaskForm()
+    form.initial['target'] = Project.objects.get(id=1).target
+
     context = {
         'form': form,
         'error': error
