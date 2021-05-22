@@ -105,12 +105,15 @@ class TaskForm(ModelForm):
                 'placeholder': 'Введите название'
             }),
             "target": Textarea(attrs={
-                'class': 'form-control'
+                'class': 'form-control',
+                'placeholder': 'Введите цель'
             }),
             "hypotesis": Textarea(attrs={
-                'class': 'form-control'
+                'class': 'form-control',
+                'placeholder': 'Введите гипотезу'
             }),
             "output": Textarea(attrs={
-                'class': 'form-control'
+                'class': 'form-control',
+                'placeholder': 'Введите вывод'
             }),
         }

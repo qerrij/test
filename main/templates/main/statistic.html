@@ -46,7 +46,15 @@
             </nav>
         </header>
 
-
+        <form method="post">
+            {% csrf_token %}
+            {{ form.name }}<br>
+            {{ form.target }}<br>
+            {{ form.hypotesis }}<br>
+            {{ form.output }}<br>
+            <button type="submit" class="btn btn-success">Добавить</button>
+            <span>{{ error }}</span>
+        </form>
 
 
     </body>

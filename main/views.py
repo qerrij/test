@@ -89,7 +89,13 @@ def statistic(request):
     students = Friend.objects.raw('SELECT main_friend.id, main_friend.friend_id FROM main_friend WHERE main_friend.user_id = %s', [user.id])
     for i in students:
         print(i.friend_id)
-    return render(request, 'main/statistic.html')
+        if request.method == 'POST':
+            form = TaskForm(request.POST or None, instance=Project.objects.filter(author_id=i.friend_id)[0])
+            if form.is_valid():
+                form.save()
+                # return redirect('home')
+        form = TaskForm(instance=Project.objects.filter(author_id=i.friend_id)[0])
+    return render(request, 'main/statistic.html', {"form": form})
 
 
 def index(request):
@@ -168,27 +174,22 @@ def about(request):
 def create(request):
     error = ''
     user = request.user
-    projects = Project.objects.raw = ('SELECT main_project.id FROM main_project WHERE main_project.author_id = %s', [user.id])
-    for i in projects:
-        print(i)
-        count = i[0]
-        print(count)
-    print(count)
-    if count > 0:
+    projects = Project.objects.filter(author_id=user.id)
+
+    if len(projects) > 0:
         print("Проект есть")
     else:
+        Project.objects.create(target='Цель', author=user)
         print("Проектов нет")
+
     if request.method == 'POST':
-        form = TaskForm(request.POST)
+        form = TaskForm(request.POST or None, instance=Project.objects.filter(author_id=user.id)[0])
         if form.is_valid():
             form.save()
             # return redirect('home')
         else:
             error = 'Форма была некорректной'
-
-    form = TaskForm()
-    form.initial['target'] = Project.objects.get(id=1).target
-
+    form = TaskForm(instance=Project.objects.filter(author_id=user.id)[0])
     context = {
         'form': form,
         'error': error
