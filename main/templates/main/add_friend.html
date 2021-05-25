@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+    {% csrf_token %}
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.user }}
+        <p>Выберите ученика</p>
+        {{form.friend}}
+        <button name="add-friend">Добавить в друзья</button>
+    </form>
+    <a href="{% url 'personal_account' %}">Личный кабинет</a>
+
+
+{% endblock %}

@@ -37,7 +37,10 @@
           <nav class="my-2 my-md-0 me-md-3">
             <a class="p-2 text-dark" href="{% url 'home' %}">Главная</a>
             <a class="p-2 text-dark" href="{% url 'about' %}">Про нас</a>
+
+                {% if user.choice_field == 1 %}
               <a class="p-2 text-dark" href="{% url 'create' %}">Создать проект</a>
+              {% endif %}
               <a class="p-2 text-dark" href="{% url 'personal_account' %}">Личный кабинет</a>
           </nav>
        <span class="p-2 text-dark">{{ user.first_name}} {{ user.last_name }} {{ user.username }}</span>
@@ -131,8 +134,7 @@
     {% for key, value in course.items %}
          <article class="screen3">
              <div class="third">
-
-                <a href='/detail/{{key.id}}'>{{key.status}}</a>
+                <a href='/detail/{{key.id}}'>COUNTINUE</a>
 
              </div>
              <ol>

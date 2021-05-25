@@ -15,6 +15,8 @@ urlpatterns = [
     path('create_module', views.create_module, name='create_module'),
     path('create-course', views.create_course, name='create-course'),
     path('statistic', views.statistic, name='statistic'),
+    path('add_friend', views.add_friend, name='add_friend'),
+    path('student_project/<int:id>', views.student_project, name='student_project'),
     path('detail/<int:id>', views.detail_page, name='detail_page'),
     path('detail_course/<int:id>', views.detail_course, name='detail_course')
 ]

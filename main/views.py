@@ -86,19 +86,35 @@ def create_course(request):
 
 def statistic(request):
     user = request.user
-    students = Friend.objects.raw('SELECT main_friend.id, main_friend.friend_id FROM main_friend WHERE main_friend.user_id = %s', [user.id])
-    for i in students:
-        print(i.friend_id)
-        if request.method == 'POST':
-            form = TaskForm(request.POST or None, instance=Project.objects.filter(author_id=i.friend_id)[0])
-            if form.is_valid():
-                form.save()
-                # return redirect('home')
-        form = TaskForm(instance=Project.objects.filter(author_id=i.friend_id)[0])
-    return render(request, 'main/statistic.html', {"form": form})
+    studentsObj = Friend.objects.filter(user_id=user.id)
+    students = []
+    for i in studentsObj:
+        students.append(CustomUser.objects.get(id=i.friend_id))
+    # print(students)
+    return render(request, 'main/statistic.html', {'students': students})
 
 
-def index(request):
+def student_project(request, id):
+    error = ''
+    get_article = Project.objects.filter(author_id=id)
+    if request.method == 'POST':
+        form = TaskForm(request.POST or None, instance=Project.objects.filter(author_id=id)[0])
+        if form.is_valid():
+            form.save()
+            # return redirect('home')
+        else:
+            error = 'Форма была некорректной'
+    form = TaskForm(instance=Project.objects.filter(author_id=id)[0])
+    context = {
+        'form': form,
+        'error': error,
+        'get_article': get_article
+    }
+    template = 'main/project_student.html'
+    return render(request, template, context)
+
+
+def add_friend(request):
     if 'add-friend' in request.POST:
         form = FriendForm(request.POST)
         if form.is_valid():
@@ -109,8 +125,11 @@ def index(request):
     form = FriendForm()
     if request.user.is_authenticated == True:
         form.initial['user'] = CustomUser.objects.filter(id=request.user.id)[0]
+        return render(request, 'main/add_friend.html', {'form': form})
 
-    return render(request, 'main/index.html', {'form': form})
+
+def index(request):
+    return render(request, 'main/index.html')
 
 
 def personal_account(request):

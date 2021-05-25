@@ -14,23 +14,6 @@
     <div class="button">
     <button class="register">РЕГИСТРАЦИЯ</button> <br>
     </div>
-    {% if tasks %}
-        {% for el in tasks %}
-            <div class="alert alert-warning mt-2">
-                <h3>{{ el.title }}</h3>
-                <p>{{ el.task }}</p>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p>У нас нет записей</p>
-    {% endif %}
-    <form method="post">
-        {% csrf_token %}
-            {{ form.user }}
-        <p>2</p>
-            {{form.friend}}
-        <button name="add-friend">Добавить в друзья</button>
-    </form>
 {% endblock %}
 
 

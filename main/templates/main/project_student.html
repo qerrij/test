@@ -32,7 +32,8 @@
           <nav class="my-2 my-md-0 me-md-3">
             <a class="p-2 text-dark" href="{% url 'home' %}">Главная</a>
             <a class="p-2 text-dark" href="{% url 'about' %}">Про нас</a>
-              {% if user.choice_field == 1 %}
+
+                {% if user.choice_field == 1 %}
               <a class="p-2 text-dark" href="{% url 'create' %}">Создать проект</a>
               {% endif %}
           </nav>
@@ -46,17 +47,19 @@
             {% endif %}
             </nav>
         </header>
-
-        {% for i in students %}
-    <h2>Проект пользователя {{i.username}}</h2>
-    <a href="/student_project/{{i.id}}">Перейти к проекту ученика</a><br>
-
-        {% endfor %}
-    
     <p>
-        <a href="{% url 'personal_account' %}">Личный кабинет</a>
+        <a href="{% url 'statistic' %}">Вернуться назад</a>
     </p>
+            <form method="post">
+    {% csrf_token %}
+    {{ form.name }}<br>
+    {{ form.target }}<br>
+    {{ form.hypotesis }}<br>
+    {{ form.output }}<br>
+    <button type="submit" class="btn btn-success">Добавить</button>
+    <span>{{ error }}</span>
+</form>
 
 
     </body>
-</html>
+    </html>

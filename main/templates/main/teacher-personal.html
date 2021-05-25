@@ -36,8 +36,10 @@
           <nav class="my-2 my-md-0 me-md-3">
             <a class="p-2 text-dark" href="{% url 'home' %}">Главная</a>
             <a class="p-2 text-dark" href="{% url 'about' %}">Про нас</a>
+
+                {% if user.choice_field == 1 %}
               <a class="p-2 text-dark" href="{% url 'create' %}">Создать проект</a>
-<!--              <a class="p-2 text-dark" href="{% url 'personal_account' %}">Личный кабинет</a>-->
+              {% endif %}
           </nav>
        <span class="p-2 text-dark">{{ user.first_name}} {{ user.last_name }} {{ user.username }}</span>
             <nav class="my-2 my-md-0 me-md-3">
@@ -65,19 +67,11 @@
                             <p>Загрузите ссылку на видео(информация)</p>
                         {{ formCourse.information }}
                             <p>Создайте кейсы для выполнения заданий учеником</p>
-<!--                        {{ formCourse.cases }}-->
-<!--                            <button>Добавить кейсы</button>-->
-                            <p><-- Дальше список уже подготовленных вопросов, пока учитель сам их придумывать не может)) --> </p>
                         <button name="add">Создать модуль</button>
                         </form>
-<!--                <form method="post">-->
-<!--                    {% csrf_token %}-->
-<!--                    <p>Название курса</p>-->
-<!--                    {{formCourse.name1}}-->
-<!--                     {{ formCourse.information }}-->
-<!--                    <button name="add-course">Создать курс</button>-->
-<!--                </form>-->
-                <a href="{% url 'create-course' %}">Добавить курс</a>
+
+                <a href="{% url 'create-course' %}">Добавить курс</a><br>
+                <a href="{% url 'personal_account' %}">Личный кабинет</a>
             </article>
         </main>
     </body>

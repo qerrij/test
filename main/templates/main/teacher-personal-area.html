@@ -32,8 +32,10 @@
           <nav class="my-2 my-md-0 me-md-3">
             <a class="p-2 text-dark" href="{% url 'home' %}">Главная</a>
             <a class="p-2 text-dark" href="{% url 'about' %}">Про нас</a>
+
+                {% if user.choice_field == 1 %}
               <a class="p-2 text-dark" href="{% url 'create' %}">Создать проект</a>
-<!--              <a class="p-2 text-dark" href="{% url 'personal_account' %}">Личный кабинет</a>-->
+              {% endif %}
           </nav>
        <span class="p-2 text-dark">{{ user.first_name}} {{ user.last_name }} {{ user.username }}</span>
             <nav class="my-2 my-md-0 me-md-3">
@@ -45,8 +47,9 @@
             {% endif %}
             </nav>
         </header>
-    <a href="{% url 'create_module' %}">Создать модуль</a>
-    <a href="{% url 'statistic' %}">Статистика</a>
+    <a href="{% url 'create_module' %}">Создать модуль</a><br>
+    <a href="{% url 'statistic' %}">Статистика</a><br>
+    <a href="{% url 'add_friend' %}">Добавить ученика</a>
 
     </body>
 </html>
